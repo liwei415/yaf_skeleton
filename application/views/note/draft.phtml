@@ -1,0 +1,76 @@
+<?php
+include(dirname(dirname(__FILE__)) . '/' . 'head.php');
+?>
+<section class="content-wrap">
+  <div class="container">
+    <div class="row">
+
+      <main class="col-md-8 main-content">
+
+<?php
+echo '<article id="" class="post featured">';
+
+echo '<header class="post-head">';
+echo '<h1 class="post-title">Draft</h1>';
+echo '<section class="post-meta">';
+echo '<span class="author">作者：<a href="#">巍哥</a></span> &bull; &nbsp';
+echo '<time class="post-date" datetime="" title="">'.date("Y-m-d H:i:s").'</time>';
+echo '</section>';
+echo '</header>';
+
+
+echo '<section class="post-content">';
+
+$Parsedown = new Our_Parsedown();
+
+$art = file_get_contents('./md/note.md');
+echo $Parsedown->text($art);
+
+
+echo '</section>';
+
+echo '<footer class="post-footer clearfix">';
+echo '<div class="pull-left tag-list">';
+echo '<i class="fa fa-folder-open-o"></i>';
+
+echo '</div>';
+echo '<div class="pull-right share">';
+echo '<div class="bdsharebuttonbox share-icons">';
+echo '<a href="#" class="bds_more" data-cmd="more"></a>';
+echo '<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>';
+echo '<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>';
+echo '<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>';
+echo '<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>';
+echo '<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>';
+echo '</div>';
+echo '</div>';
+echo '</footer>';
+echo '</article>';
+
+echo '<div class="about-author clearfix">';
+echo '<a href="#"><img src="" alt="" class="avatar pull-left"></a>';
+
+echo '<div class="details">';
+echo '<div class="author">关于作者 <a href="#">巍哥</a></div>';
+echo '<div class="meta-info">';
+echo '<span class="loaction"><i class="fa fa-home"></i>火星</span>';
+echo '<span class="website"><i class="fa fa-globe"></i><a href="#" targer="_blank">个人网站/博客</a></span>';
+echo '</div>';
+echo '</div>';
+echo '</div>';
+
+echo '<div class="prev-next-wrap clearfix">';
+
+echo '&nbsp;&nbsp;';
+echo '</div>';
+
+?>
+  </main>
+
+<?php include(dirname(dirname(__FILE__)) . '/' . 'side.php'); ?>
+
+    </div>
+  </div>
+</section>
+
+<?php include(dirname(dirname(__FILE__)) . '/' . 'foot.php'); ?>

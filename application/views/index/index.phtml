@@ -1,0 +1,93 @@
+<?php
+include(dirname(dirname(__FILE__)) . '/' . 'head.php');
+$arts = ${'arts'};
+$page_info = ${'page_info'};
+?>
+<section class="content-wrap">
+  <div class="container">
+    <div class="row">
+
+      <main class="col-md-8 main-content">
+
+<?php
+foreach ($arts as $art) {
+    $tags = explode(',', $art['tag']);
+
+    $t_str = '';
+    if (count($tags) > 0) {
+        foreach ($tags as $tag) {
+            $t_str .= 'tag-' . $tag . ' ';
+        }
+    }
+
+    if ($art['featured'] == 1) {
+        echo '<article id='.$art['a_id'].' class="post '.$t_str.'featured">';
+        echo '<div class="featured" title="推荐文章">';
+        echo '<i class="fa fa-star"></i>';
+        echo '</div>';
+    }
+    else {
+        echo '<article id='.$art['a_id'].' class="post '.$t_str.'">';
+    }
+
+    echo '<div class="post-head">';
+    echo '<h1 class="post-title"><a href="/post/'.$art['a_id'].'">'.$art['title'].'</a></h1>';
+    echo '<div class="post-meta">';
+    echo '<span class="author">作者：<a href="/author/'.$art['u_id'].'">'.$art['author'].'</a></span> &bull; &nbsp';
+    echo '<time class="post-date" datetime="'.$art['date_added'].'" title="'.$art['date_added'].'">'.$art['date_added'].'</time>';
+    echo '</div>';
+    echo '</div>';
+    echo '<div class="post-content">';
+    echo '<p>'.$art['summary'].'</p>';
+    echo '</div>';
+    echo '<div class="post-permalink">';
+    echo '<a href="/post/'.$art['a_id'].'" class="btn btn-default">阅读全文</a>';
+    echo '</div>';
+
+    echo '<footer class="post-footer clearfix">';
+    echo '<div class="pull-left tag-list">';
+    echo '<i class="fa fa-folder-open-o"></i>';
+
+    if (count($tags) > 0) {
+        foreach ($tags as $k => $v) {
+            if ($k == 0) {
+                echo '<a href="/tag/'.$v.'">'.$v.'</a>';
+            }
+            else {
+                echo ', <a href="/tag/'.$v.'">'.$v.'</a>';
+            }
+        }
+    }
+
+    echo '</div>';
+    echo '<div class="pull-right share">';
+    echo '</div>';
+    echo '</footer>';
+	echo '</article>';
+}
+
+
+echo '<nav class="pagination" role="navigation">';
+if ($page_info['page'] == 2) {
+    echo '<a class="newer-posts" href="/page/1"><i class="fa fa-angle-left"></i></a>';
+}
+else if ($page_info['page'] > 2) {
+    echo '<a class="newer-posts" href="/page/'.$page_info['prev_page'].'"><i class="fa fa-angle-left"></i></a>';
+}
+
+echo '<span class="page-number">第 '.$page_info['page'].' 页 &frasl; 共 '.$page_info['pages'].' 页</span>';
+
+if ($page_info['page'] < $page_info['pages']) {
+    echo '<a class="older-posts" href="/page/'.$page_info['next_page'].'"><i class="fa fa-angle-right"></i></a>';
+}
+echo '</nav>';
+?>
+      </main>
+
+      <?php include(dirname(dirname(__FILE__)) . '/' . 'side.php'); ?>
+
+    </div>
+  </div>
+</section>
+
+<?php include(dirname(dirname(__FILE__)) . '/' . 'foot.php'); ?>
